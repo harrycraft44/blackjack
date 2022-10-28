@@ -31,6 +31,15 @@ namespace blackjack
 
             return card;
         }
+        public void restart(string reason) {
+
+            pictureBox1.BringToFront();
+            button6.Show();
+            label2.Show();
+            button6.BringToFront();
+            label2.BringToFront();
+            label2.Text = reason;
+        }
         public void winstate() {
             int playersTotal = 0 ;
             int dealerTotal = 0;
@@ -45,21 +54,17 @@ namespace blackjack
             if (playersTotal == 21 && dealerTotal == 21)
             {
 
-                string message = "you draw";
-                string title = "draw";
-                MessageBox.Show(message, title);
+                restart("you draw");
+
             }
             else if (playersTotal == 21)
             {
-                string message = "you win";
-                string title = "win";
-                MessageBox.Show(message, title);
+                restart("you win");
+
             }
             else if (dealerTotal == 21) {
 
-                string message = "you lose";
-                string title = "lose";
-                MessageBox.Show(message, title);
+                restart("you lose");
             }
         }
         public void hitwinstate() {
@@ -73,9 +78,7 @@ namespace blackjack
             if (playersTotal > 21) {
 
 
-                string message = "you bust";
-                string title = "bust";
-                MessageBox.Show(message, title);
+                restart("you gone bust");
             }
         }
 
@@ -101,6 +104,9 @@ namespace blackjack
             button4.Hide();
             button5.Hide();
 
+            button6.Hide();
+            label2.Hide();
+
             // initialize cards
             DealerCards[0] = getCards();
             DealerCards[1] = getCards();
@@ -109,7 +115,7 @@ namespace blackjack
             PlayerCards[1] = getCards();
 
             // Place bet
-           
+            betState();
 
             winstate();
         }
@@ -137,24 +143,30 @@ namespace blackjack
             if (dealerTotal > 21)
             {
                 // Player wins
+                restart("you win");
+
             }
 
             else if (playersTotal > 21)
             {
                 // Dealer wins
+                restart("you lose");
+
             }
 
             else if (dealerTotal > playersTotal)
             {
                 // Dealer wins
+                restart("you lose");
+
             }
 
             else
             {
-                // Player wins
+                restart("you win");
             }
 
-            betState();
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -182,6 +194,12 @@ namespace blackjack
             button3.Hide();
             button4.Hide();
             button5.Hide();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Application.ExecutablePath); // to start new instance of application
+            this.Close(); //to turn off current app
         }
     }
 }
