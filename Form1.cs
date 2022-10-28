@@ -45,12 +45,7 @@ namespace blackjack
                 string message = "you win";
                 string title = "win";
                 MessageBox.Show(message, title);
-            } else if (playersTotal > 21) {
-                string message = "you gone bust";
-                string title = "lose"; 
-                MessageBox.Show(message, title);
-            }
-            
+            } 
         }
 
         public Form1()
@@ -78,8 +73,9 @@ namespace blackjack
         private void button1_Click(object sender, EventArgs e)
         {
             // do something here
-
-            winstate();
+            PlayerCards[PlayerCards.Length -1] = getCards();
+            label5.Text = PlayerCards[PlayerCards.Length - 1].value.ToString() + PlayerCards[PlayerCards.Length -1].suit;
+            
         }
     }
 }
