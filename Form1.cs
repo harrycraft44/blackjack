@@ -39,8 +39,8 @@ namespace blackjack
             DealerCards[0] = getCards();
             DealerCards[1] = getCards();
 
-            label1.Text = DealerCards[0].ToString();
-            label2.Text = DealerCards[1].ToString();
+            label1.Text = DealerCards[0].value.ToString()+ DealerCards[0].suit;
+            label2.Text = DealerCards[1].value.ToString() + DealerCards[1].suit;
         }
 
         private void button1_Click(object sender, EventArgs e)
