@@ -18,6 +18,8 @@ namespace blackjack
         card[] DealerCards = new card[10];
         card[] PlayerCards = new card[10];
 
+        int playerBet = 0;
+
         public card getCards()
         {
             card card = new card();
@@ -76,6 +78,17 @@ namespace blackjack
                 MessageBox.Show(message, title);
             }
         }
+
+        public void betState()
+        {
+            button1.Hide();
+            button2.Hide();
+
+            button3.Show();
+            button4.Show();
+            button5.Show();
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -83,6 +96,11 @@ namespace blackjack
         
         private void Form1_Load(object sender, EventArgs e)
         {
+            label1.Text = "£" + playerBet.ToString();
+            button3.Hide();
+            button4.Hide();
+            button5.Hide();
+
             // initialize cards
             DealerCards[0] = getCards();
             DealerCards[1] = getCards();
@@ -90,6 +108,8 @@ namespace blackjack
             PlayerCards[0] = getCards();
             PlayerCards[1] = getCards();
 
+            // Place bet
+           
 
             winstate();
         }
@@ -133,6 +153,35 @@ namespace blackjack
             {
                 // Player wins
             }
+
+            betState();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            playerBet += 10;
+            label1.Text = "£" + playerBet.ToString();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (playerBet <= 0)
+            {
+                return;
+            }
+
+            playerBet -= 10;
+            label1.Text = "£" + playerBet.ToString();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            button1.Show();
+            button2.Show();
+
+            button3.Hide();
+            button4.Hide();
+            button5.Hide();
         }
     }
 }
