@@ -59,17 +59,17 @@ namespace blackjack
             if (playersTotal == 21 && dealerTotal == 21)
             {
 
-                restart("you draw");
+                restart("you draw\nYour total is: £" + playerBet.ToString());
 
             }
             else if (playersTotal == 21)
             {
-                restart("you win");
+                restart("you win\nYou have won: £" + ((playerBet * 2) * 1.5).ToString());
 
             }
             else if (dealerTotal == 21) {
 
-                restart("you lose");
+                restart("you lose\nDealer has won: £" + ((playerBet * 2) * 1.5).ToString());
             }
         }
 
@@ -83,9 +83,7 @@ namespace blackjack
                 playersTotal += cards.value;
             }
             if (playersTotal > 21) {
-
-
-                restart("you gone bust");
+                restart("you lose\nDealer has won: £" + (playerBet * 2).ToString());
             }
         }
 
@@ -108,6 +106,8 @@ namespace blackjack
         private void Form1_Load(object sender, EventArgs e)
         {
             label1.Text = "£" + playerBet.ToString();
+            label3.Text = "£" + playerBet.ToString();
+
             button3.Hide();
             button4.Hide();
             button5.Hide();
@@ -155,27 +155,26 @@ namespace blackjack
             if (dealerTotal > 21)
             {
                 // Player wins
-                restart("you win");
-
+                playerBet *= 2;
+                restart("you win\nYou have won: £" + playerBet.ToString());
             }
 
             else if (playersTotal > 21)
             {
                 // Dealer wins
-                restart("you lose");
-
+                restart("you lose\nDealer has won: £" + (playerBet * 2).ToString());
             }
 
             else if (dealerTotal > playersTotal)
             {
                 // Dealer wins
-                restart("you lose");
-
+                restart("you lose\nDealer has won: £" + (playerBet * 2).ToString());
             }
 
             else
             {
-                restart("you win");
+                playerBet *= 2;
+                restart("you win\nYou have won: £" + playerBet.ToString());
             }
 
 
@@ -209,6 +208,8 @@ namespace blackjack
             button3.Hide();
             button4.Hide();
             button5.Hide();
+
+            label3.Text = "£" + playerBet.ToString();
         }
 
         private void button6_Click(object sender, EventArgs e)
