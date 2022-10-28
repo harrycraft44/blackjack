@@ -6,6 +6,7 @@ namespace blackjack
 {
     public partial class Form1 : Form
     {
+        // Card data
         public struct card
         {
             public int value;
@@ -18,8 +19,10 @@ namespace blackjack
         card[] DealerCards = new card[10];
         card[] PlayerCards = new card[10];
 
+        // Amount player bets - Will be matched by dealer
         int playerBet = 0;
 
+        // Assign a card to the player or dealer
         public card getCards()
         {
             card card = new card();
@@ -31,6 +34,8 @@ namespace blackjack
 
             return card;
         }
+
+        // Checks if the dealer or player has won
         public void winstate() {
             int playersTotal = 0 ;
             int dealerTotal = 0;
@@ -62,6 +67,8 @@ namespace blackjack
                 MessageBox.Show(message, title);
             }
         }
+
+        // Check if the player goes bust when they hit
         public void hitwinstate() {
 
             int playersTotal = 0;
@@ -79,6 +86,7 @@ namespace blackjack
             }
         }
 
+        // Switch UI to bet
         public void betState()
         {
             button1.Hide();
@@ -114,21 +122,25 @@ namespace blackjack
             winstate();
         }
 
+        // Hit
         private void button1_Click(object sender, EventArgs e)
         {
             PlayerCards[PlayerCards.Length -1] = getCards();
             hitwinstate();
         }
 
+        // Stand
         private void button2_Click(object sender, EventArgs e)
         {
             button1.Hide();
             int playersTotal = 0;
             int dealerTotal = 0;
+
             foreach (var cards in PlayerCards)
             {
                 playersTotal += cards.value;
             }
+
             foreach (var cards in DealerCards)
             {
                 dealerTotal += cards.value;
@@ -157,12 +169,14 @@ namespace blackjack
             betState();
         }
 
+        // Higher bet
         private void button3_Click(object sender, EventArgs e)
         {
             playerBet += 10;
             label1.Text = "£" + playerBet.ToString();
         }
 
+        // Lower bet
         private void button4_Click(object sender, EventArgs e)
         {
             if (playerBet <= 0)
@@ -174,6 +188,7 @@ namespace blackjack
             label1.Text = "£" + playerBet.ToString();
         }
 
+        // Confirm bet
         private void button5_Click(object sender, EventArgs e)
         {
             button1.Show();
