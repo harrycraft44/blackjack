@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Xml.Serialization;
 
 namespace blackjack
@@ -36,18 +37,46 @@ namespace blackjack
             {
                 playersTotal += cards.value;
             }
-            foreach (var cards in PlayerCards)
+            foreach (var cards in DealerCards)
             {
                 dealerTotal += cards.value;
             }
-            if (playersTotal == 21) {
+            if (playersTotal == 21 && dealerTotal == 21)
+            {
 
+                string message = "you draw";
+                string title = "draw";
+                MessageBox.Show(message, title);
+            }
+            else if (playersTotal == 21)
+            {
                 string message = "you win";
                 string title = "win";
                 MessageBox.Show(message, title);
-            } 
-        }
+            }
+            else if (dealerTotal == 21) {
 
+                string message = "you lose";
+                string title = "lose";
+                MessageBox.Show(message, title);
+            }
+        }
+        public void hitwinstate() {
+
+            int playersTotal = 0;
+
+            foreach (var cards in PlayerCards)
+            {
+                playersTotal += cards.value;
+            }
+            if (playersTotal > 21) {
+
+
+                string message = "you bust";
+                string title = "bust";
+                MessageBox.Show(message, title);
+            }
+        }
         public Form1()
         {
             InitializeComponent();
@@ -72,10 +101,9 @@ namespace blackjack
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // do something here
             PlayerCards[PlayerCards.Length -1] = getCards();
             label5.Text = PlayerCards[PlayerCards.Length - 1].value.ToString() + PlayerCards[PlayerCards.Length -1].suit;
-            
+            hitwinstate();
         }
     }
 }
