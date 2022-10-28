@@ -60,12 +60,18 @@ namespace blackjack
         
         private void Form1_Load(object sender, EventArgs e)
         {
-            // add dealer's cards 
+            // initialize cards
             DealerCards[0] = getCards();
             DealerCards[1] = getCards();
 
+            PlayerCards[0] = getCards();
+            PlayerCards[1] = getCards();
+
             label1.Text = DealerCards[0].value.ToString()+ DealerCards[0].suit;
             label2.Text = DealerCards[1].value.ToString() + DealerCards[1].suit;
+
+            label3.Text = PlayerCards[0].value.ToString() + PlayerCards[0].suit;
+            label4.Text = PlayerCards[1].value.ToString() + PlayerCards[1].suit;
             winstate();
         }
 
