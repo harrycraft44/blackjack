@@ -37,8 +37,12 @@ namespace blackjack
 
         // Checks if the dealer or player has won
         public void restart(string reason) {
+            button1.Hide();
+            button2.Hide();
+            button3.Hide();
+            button4.Hide();
+            button5.Hide();
 
-            pictureBox1.BringToFront();
             button6.Show();
             label2.Show();
             button6.BringToFront();
