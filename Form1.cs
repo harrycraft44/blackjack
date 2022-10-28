@@ -26,8 +26,6 @@ namespace blackjack
             card.value = cardValue[rand.Next(13)];
             card.suit = suits[rand.Next(4)];
 
-            label1.Text = card.value.ToString();
-            label2.Text = card.suit;
 
             return card;
         }
@@ -92,18 +90,13 @@ namespace blackjack
             PlayerCards[0] = getCards();
             PlayerCards[1] = getCards();
 
-            label1.Text = DealerCards[0].value.ToString()+ DealerCards[0].suit;
-            label2.Text = DealerCards[1].value.ToString() + DealerCards[1].suit;
 
-            label3.Text = PlayerCards[0].value.ToString() + PlayerCards[0].suit;
-            label4.Text = PlayerCards[1].value.ToString() + PlayerCards[1].suit;
             winstate();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             PlayerCards[PlayerCards.Length -1] = getCards();
-            label5.Text = PlayerCards[PlayerCards.Length - 1].value.ToString() + PlayerCards[PlayerCards.Length -1].suit;
             hitwinstate();
         }
 
