@@ -1,3 +1,5 @@
+using System.Xml.Serialization;
+
 namespace blackjack
 {
     public partial class Form1 : Form
@@ -27,12 +29,35 @@ namespace blackjack
 
             return card;
         }
+        public void winstate() {
+            int playersTotal = 0 ;
+            int dealerTotal = 0;
+            foreach (var cards in PlayerCards)
+            {
+                playersTotal += cards.value;
+            }
+            foreach (var cards in PlayerCards)
+            {
+                dealerTotal += cards.value;
+            }
+            if (playersTotal == 21) {
+
+                string message = "you win";
+                string title = "win";
+                MessageBox.Show(message, title);
+            } else if (playersTotal > 21) {
+                string message = "you gone bust";
+                string title = "lose"; 
+                MessageBox.Show(message, title);
+            }
+            
+        }
 
         public Form1()
         {
             InitializeComponent();
         }
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             // add dealer's cards 
@@ -41,11 +66,14 @@ namespace blackjack
 
             label1.Text = DealerCards[0].value.ToString()+ DealerCards[0].suit;
             label2.Text = DealerCards[1].value.ToString() + DealerCards[1].suit;
+            winstate();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            // do something here
+
+            winstate();
         }
     }
 }
